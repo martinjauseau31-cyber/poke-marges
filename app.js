@@ -348,13 +348,16 @@
     lh.appendChild(el("div", "kpi-value num delta " + dir, t.investedStock > 0 ? signed(t.latent) : "—"));
     lat.appendChild(lh);
     if (t.investedStock > 0) {
-      var bar = el("div", "mover-track"); bar.style.height = "10px";
+      var bar = el("div", "mover-track");
+      bar.style.cssText = "height:10px;margin-bottom:16px";
       var fill = el("div", "mover-fill");
       fill.style.width = Math.max(2, Math.min(100, Math.abs(t.latent) / t.investedStock * 100)) + "%";
       fill.style.background = t.latent >= 0 ? "var(--good)" : "var(--bad)";
       bar.appendChild(fill); lat.appendChild(bar);
-      lat.appendChild(el("p", "card-sub", money(t.investedStock) + " investis · " + money(t.parc)
-        + " de valeur estimée · " + pct(t.latent / t.investedStock * 100)));
+      var note = el("p", "card-sub", money(t.investedStock) + " investis · " + money(t.parc)
+        + " de valeur estimée · " + pct(t.latent / t.investedStock * 100));
+      note.style.margin = "0";
+      lat.appendChild(note);
     } else {
       lat.appendChild(el("p", "card-sub", "Renseigne des prix d'achat pour suivre ta marge latente."));
     }
